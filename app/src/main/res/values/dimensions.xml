@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="margin_top100">100dp</string>
+    <string name="margin_top80">80dp</string>
+    <string name="margin_start_end">20dp</string>
+</resources>

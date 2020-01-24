@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="arcgis_map">#298AAF</color>
+    <color name="arcgis_scene">#2956AF</color>
+    <color name="osm">#7948F1</color>
+    <color name="google_map">#B99F18</color>
+    <color name="bing_maps">#5D118D</color>
+    <color name="here_map">#96125B</color>
+    <color name="Leaflet_maps">#C6EB05</color>
+    <color name="tomtom_map">#FF5722</color>
+</resources>

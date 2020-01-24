@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">OSMmaps</string>
+    <string name="operation_base">operation_base</string>
+    <string name="arcgis_map">ArcGIS MAP</string>
+    <string name="arcgis_scene">ArcGIS Scene</string>
+    <string name="osm">Open Street Map</string>
+    <string name="google_map">Google Map</string>
+    <string name="bing_maps">Bing Map</string>
+    <string name="here_map">Here Map</string>
+    <string name="Leaflet_maps">Leaflet Map</string>
+    <string name="tomtom_map">TomTom Map</string>
+    <string name="location_permission_denied">Permission denied</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Find an address</string>
+    <string name="nothing_found">Nothing found for</string>
+</resources>
