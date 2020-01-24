@@ -37,7 +37,10 @@ public class MainActivity extends AppCompatActivity  {
         View.OnClickListener clickListener = v -> Toast.makeText(getApplicationContext(), "coming soon !", Toast.LENGTH_LONG).show();
         leaflet.setOnClickListener(clickListener);
         bing.setOnClickListener(clickListener);
-        tomtom.setOnClickListener(clickListener);
+        tomtom.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(),TomTomActivity.class);
+            startActivity(intent);
+        });
         google.setOnClickListener(clickListener);
         here.setOnClickListener(clickListener);
     }

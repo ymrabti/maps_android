@@ -21,6 +21,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".GoogleMapsActivity">
+            
+        </activity>
+
+        <activity android:name=".TomTomActivity" >
+
+            <meta-data android:name="OnlineMaps.Key" android:value="jAPDhYsg2QTWPpEwy2eP4VfzCQTYyEbE" />
+            <meta-data android:name="OnlineTraffic.Key" android:value="jAPDhYsg2QTWPpEwy2eP4VfzCQTYyEbE" />
+            <meta-data android:name="OnlineSearch.Key" android:value="jAPDhYsg2QTWPpEwy2eP4VfzCQTYyEbE" />
+            <meta-data android:name="OnlineRouting.Key" android:value="jAPDhYsg2QTWPpEwy2eP4VfzCQTYyEbE" />
+            <meta-data android:name="GeofencingApi.Key" android:value="jAPDhYsg2QTWPpEwy2eP4VfzCQTYyEbE" />
+
+        </activity>
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -29,32 +42,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ArcgisActivity"
+        <activity
+            android:name=".ArcgisActivity"
             android:launchMode="singleTop">
-
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
-        </activity>
 
-        <activity android:name=".ArcGISscesneActivity">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
-
-        <activity android:name=".OpenStreetMapActivity">
-        </activity>
-
+        <activity android:name=".ArcGISscesneActivity" />
+        <activity android:name=".OpenStreetMapActivity" />
         <activity
             android:name="com.esri.arcgisruntime.security.DefaultOAuthIntentReceiver"
             android:label="OAuthIntentReceiver"
             android:launchMode="singleTask">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="my-app"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="my-app" />
             </intent-filter>
         </activity>
     </application>

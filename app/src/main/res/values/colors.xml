@@ -11,4 +11,5 @@
     <color name="here_map">#96125B</color>
     <color name="Leaflet_maps">#C6EB05</color>
     <color name="tomtom_map">#FF5722</color>
+    <color name="defaultMapSurfaceColor">#0000ff</color>
 </resources>
