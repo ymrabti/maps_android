@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ymrabti.osmmaps">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -79,6 +80,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBTGq9wgUpIhsXcYre6WwkhSxjkydSaaAw"/>
+        <meta-data android:name="com.here.sdk.access_key_id" android:value="-EhdAyxoH-yp8s7gIUsTFg" />
+        <meta-data android:name="com.here.sdk.access_key_secret" android:value="pyfwI7jE0rkzexRJOI1qs9H7jHrLvdTNYVt0ajv0DvBPldLhoeho95SDwg7lZ8CvXi57jCu_88pfnYgSH053gQ" />
     </application>
 
 </manifest>
