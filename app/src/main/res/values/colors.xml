@@ -12,4 +12,5 @@
     <color name="Leaflet_maps">#C6EB05</color>
     <color name="tomtom_map">#FF5722</color>
     <color name="defaultMapSurfaceColor">#0000ff</color>
+    <color name="cardview_light_back">#0046FF</color>
 </resources>

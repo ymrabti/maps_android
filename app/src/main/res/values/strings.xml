@@ -13,4 +13,14 @@
     <string name="search_title">Search</string>
     <string name="search_hint">Find an address</string>
     <string name="nothing_found">Nothing found for</string>
+    <string name="pour_ajouter_">Pour ajouter une point, clicker sur un emplacement dans la carte et remplir la formulaire</string>
+    <string name="pick_place">pick_place</string>
+    <string name="normal">Normal</string>
+    <string name="hybrid">Hybrid</string>
+    <string name="satellite">Satellite</string>
+    <string name="terrain">Terrain</string>
+    <string name="none">None</string>
+    <string name="ajouter">ajouter</string>
+    <string name="type_de_point">Type de point : </string>
+    <string name="nom_de_point">Nom de point</string>
 </resources>

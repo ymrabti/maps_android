@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity  {
 
@@ -22,27 +20,18 @@ public class MainActivity extends AppCompatActivity  {
         Button tomtom = findViewById(R.id.tomtom_map);
         Button google = findViewById(R.id.google_map);
         Button here = findViewById(R.id.here_map);
-        arcgis.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(),ArcgisActivity.class);
-            startActivity(intent);
-        });
-        arscene.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(),ArcGISscesneActivity.class);
-            startActivity(intent);
-        });
-        osm.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(),OpenStreetMapActivity.class);
-            startActivity(intent);
-        });
-        View.OnClickListener clickListener = v -> Toast.makeText(getApplicationContext(), "coming soon !", Toast.LENGTH_LONG).show();
-        leaflet.setOnClickListener(clickListener);
-        bing.setOnClickListener(clickListener);
-        tomtom.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(),TomTomActivity.class);
-            startActivity(intent);
-        });
-        google.setOnClickListener(clickListener);
-        here.setOnClickListener(clickListener);
+        arcgis.setOnClickListener(v -> openActivity(ArcgisActivity.class));
+        arscene.setOnClickListener(v -> openActivity(ArcGISscesneActivity.class));
+        osm.setOnClickListener(v -> openActivity(OpenStreetMapActivity.class));
+        tomtom.setOnClickListener(v -> openActivity(TomTomActivity.class));
+        leaflet.setOnClickListener(v -> openActivity(LeafletActivity.class));
+        bing.setOnClickListener(v -> openActivity(BingActivity.class));
+        google.setOnClickListener(v -> openActivity(GoogleMapsActivity.class));
+        here.setOnClickListener(v -> openActivity(HereActivity.class));
+    }
+    private void openActivity(Class classse){
+        Intent intent = new Intent(getApplicationContext(),classse);
+        startActivity(intent);
     }
 
 }
