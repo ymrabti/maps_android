@@ -165,40 +165,10 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
         uiSettings.setMapToolbarEnabled(true);
         uiSettings.setCompassEnabled(true);
         uiSettings.setZoomControlsEnabled(true);
-        gmap.setOnMapClickListener(this::showpopup);
         gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         getLocationPermission();
         updateLocationUI();
         getDeviceLocation();
-    }
-    private void showpopup(final LatLng latLng){
-        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-        bottomSheetDialog.setContentView(R.layout.popup);
-        final Spinner type = bottomSheetDialog.findViewById(R.id.type_point);
-        final EditText text_point = bottomSheetDialog.findViewById(R.id.text_point);
-        TextView add = bottomSheetDialog.findViewById(R.id.cancel);
-        List<String> list_items = new ArrayList<>();
-        list_items.add("Type");list_items.add("Ecole");list_items.add("Restaurant");list_items.add("Cafe");list_items.add("Hospital");
-        list_items.add("faculte");list_items.add("super market");list_items.add("monument historic");list_items.add("bank");
-        ArrayAdapter<String> list_adapter = new ArrayAdapter<>(GoogleMapsActivity.this,R.layout.spim,R.id.text_spinner,list_items);
-        //list_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        type.setAdapter(list_adapter);
-        add.setOnClickListener(v -> {
-            String text1=text_point.getText().toString(),text2=type.getSelectedItem().toString();
-            if (text1.isEmpty() || text2.equals("Type")){
-                Toast.makeText(getApplicationContext(), "veuillez saisir des données valide !",Toast.LENGTH_LONG).show();
-            }
-            else{
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(latLng);
-                markerOptions.icon(get_icon(text2+""));
-                gmap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-                gmap.addMarker(markerOptions);
-                bottomSheetDialog.dismiss();
-            }
-        });
-        bottomSheetDialog.setOnCancelListener(dialog -> Toast.makeText(getApplicationContext(),"canceled",Toast.LENGTH_LONG).show());
-        bottomSheetDialog.show();
     }
     private void popup(){
         final Dialog dialog = new Dialog(this);
@@ -305,7 +275,9 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
     }
     private void getLocationPermission() {
         if (ContextCompat.checkSelfPermission(
-                this.getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+                this.getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        && ContextCompat.checkSelfPermission(
+                this.getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
         {
             mLocationPermissionGranted = true;
         } else {
