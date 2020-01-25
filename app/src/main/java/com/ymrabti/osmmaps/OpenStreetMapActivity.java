@@ -1,7 +1,6 @@
 package com.ymrabti.osmmaps;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
@@ -11,6 +10,8 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.preference.PreferenceManager;
 
@@ -38,7 +39,7 @@ import org.osmdroid.views.util.constants.MapViewConstants;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class OpenStreetMapActivity extends Activity implements  MapViewConstants {
+public class OpenStreetMapActivity extends AppCompatActivity implements  MapViewConstants {
     MapView map = null;
     ArrayList<OverlayItem> items;private IMapController mapControllers;
 
@@ -48,6 +49,7 @@ public class OpenStreetMapActivity extends Activity implements  MapViewConstants
         Configuration.getInstance().load(
                 this, PreferenceManager.getDefaultSharedPreferences(this));
         setContentView(R.layout.activity_osm);
+        ActionBar actionBar= getSupportActionBar();actionBar.setTitle("Open Street Maps");
         items = new ArrayList<>();
         map = findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.OpenTopo);

@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class GoogleMapsActivity extends AppCompatActivity {
+public class HereActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_google_maps);
-        ActionBar actionBar= getSupportActionBar();actionBar.setTitle("Google Maps");
+        setContentView(R.layout.activity_here);
+        ActionBar actionBar= getSupportActionBar();actionBar.setTitle("Here Maps");
     }
 }

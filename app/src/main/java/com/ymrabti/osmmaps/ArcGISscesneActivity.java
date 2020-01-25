@@ -1,5 +1,6 @@
 package com.ymrabti.osmmaps;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -21,6 +22,7 @@ public class ArcGISscesneActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arc_gisscesne);
+        ActionBar actionBar= getSupportActionBar();actionBar.setTitle("Arc Scene");
         mSceneView = findViewById(R.id.sceneView);
         ArcGISRuntimeEnvironment.setLicense(getResources().getString(R.string.arcgis_license_key));
         setupScene1();

@@ -1,6 +1,7 @@
 package com.ymrabti.osmmaps;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -85,6 +86,7 @@ public class ArcgisActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arcgis);
+        ActionBar actionBar= getSupportActionBar();actionBar.setTitle("Esri Maps");
         mMapView = findViewById(R.id.mapView);
         mGraphicsOverlay = new GraphicsOverlay();
         mMapView.getGraphicsOverlays().add(mGraphicsOverlay);

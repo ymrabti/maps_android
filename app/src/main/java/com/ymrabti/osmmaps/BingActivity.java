@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class GoogleMapsActivity extends AppCompatActivity {
+public class BingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_google_maps);
-        ActionBar actionBar= getSupportActionBar();actionBar.setTitle("Google Maps");
+        setContentView(R.layout.activity_bing);
+        ActionBar actionBar= getSupportActionBar();actionBar.setTitle("Bing Maps");
     }
 }

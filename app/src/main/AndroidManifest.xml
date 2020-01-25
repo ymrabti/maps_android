@@ -21,20 +21,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".GoogleMapsActivity">
-            
+        <activity android:name=".LeafletActivity"></activity>
+        <activity android:name=".HereActivity" />
+        <activity android:name=".BingActivity" />
+        <activity android:name=".GoogleMapsActivity" />
+        <activity android:name=".TomTomActivity">
+            <meta-data
+                android:name="OnlineMaps.Key"
+                android:value="jAPDhYsg2QTWPpEwy2eP4VfzCQTYyEbE" />
+            <meta-data
+                android:name="OnlineTraffic.Key"
+                android:value="jAPDhYsg2QTWPpEwy2eP4VfzCQTYyEbE" />
+            <meta-data
+                android:name="OnlineSearch.Key"
+                android:value="jAPDhYsg2QTWPpEwy2eP4VfzCQTYyEbE" />
+            <meta-data
+                android:name="OnlineRouting.Key"
+                android:value="jAPDhYsg2QTWPpEwy2eP4VfzCQTYyEbE" />
+            <meta-data
+                android:name="GeofencingApi.Key"
+                android:value="jAPDhYsg2QTWPpEwy2eP4VfzCQTYyEbE" />
         </activity>
-
-        <activity android:name=".TomTomActivity" >
-
-            <meta-data android:name="OnlineMaps.Key" android:value="jAPDhYsg2QTWPpEwy2eP4VfzCQTYyEbE" />
-            <meta-data android:name="OnlineTraffic.Key" android:value="jAPDhYsg2QTWPpEwy2eP4VfzCQTYyEbE" />
-            <meta-data android:name="OnlineSearch.Key" android:value="jAPDhYsg2QTWPpEwy2eP4VfzCQTYyEbE" />
-            <meta-data android:name="OnlineRouting.Key" android:value="jAPDhYsg2QTWPpEwy2eP4VfzCQTYyEbE" />
-            <meta-data android:name="GeofencingApi.Key" android:value="jAPDhYsg2QTWPpEwy2eP4VfzCQTYyEbE" />
-
-        </activity>
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
