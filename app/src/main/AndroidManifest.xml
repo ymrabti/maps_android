@@ -23,7 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".LeafletActivity"></activity>
+        <activity android:name=".LeafletActivity">
+
+        </activity>
         <activity android:name=".HereActivity" />
         <activity android:name=".BingActivity" />
         <activity android:name=".GoogleMapsActivity" />

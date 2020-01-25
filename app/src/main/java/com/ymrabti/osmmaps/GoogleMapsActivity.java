@@ -16,13 +16,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -31,23 +26,18 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
 
-import java.util.ArrayList;
-import java.util.List;
-import com.google.android.libraries.places.compat.GeoDataClient;
 import com.google.android.libraries.places.compat.PlaceDetectionClient;
 import com.google.android.libraries.places.compat.PlaceLikelihood;
 import com.google.android.libraries.places.compat.PlaceLikelihoodBufferResponse;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import static com.google.android.libraries.places.compat.Places.getGeoDataClient;
+
+import timber.log.Timber;
+
 import static com.google.android.libraries.places.compat.Places.getPlaceDetectionClient;
 
 public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -71,14 +61,15 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_maps);
-        ActionBar actionBar= getSupportActionBar();actionBar.setTitle("Google Maps");
+        ActionBar actionBar= getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Google Maps");
+        }
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
             mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
-            CameraPosition mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
-        GeoDataClient mGeoDataClient = getGeoDataClient(this);
         mPlaceDetectionClient = getPlaceDetectionClient(this);
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         mapView = findViewById(R.id.mapView);
@@ -89,30 +80,32 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
                 checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                /**/current= new LatLng(location.getLatitude(),location.getLongitude());
-                MarkerOptions current_position=new MarkerOptions();
-                current_position.position(current);
-                gmap.addMarker(current_position);
-            }
+        if (locationManager != null) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+                    /**/current= new LatLng(location.getLatitude(),location.getLongitude());
+                    MarkerOptions current_position=new MarkerOptions();
+                    current_position.position(current);
+                    gmap.addMarker(current_position);
+                }
 
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
+                @Override
+                public void onStatusChanged(String provider, int status, Bundle extras) {
 
-            }
+                }
 
-            @Override
-            public void onProviderEnabled(String provider) {
+                @Override
+                public void onProviderEnabled(String provider) {
 
-            }
+                }
 
-            @Override
-            public void onProviderDisabled(String provider) {
+                @Override
+                public void onProviderDisabled(String provider) {
 
-            }
-        });
+                }
+            });
+        }
 
         FloatingActionButton fb = findViewById(R.id.change_basemap);
         fb.setOnClickListener(v -> popup());
@@ -200,57 +193,6 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
         });
         dialog.show();
     }
-    public static BitmapDescriptor get_icon(String type){
-        if (type.equals("Ecole")){
-            return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE);
-        }
-        if (type.equals("Restaurant")){
-            return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW);}
-        if (type.equals("Cafe")){
-            return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN);}
-        if (type.equals("Hospital")){
-            return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE);}
-        if (type.equals("faculte")){
-            return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);}
-        if (type.equals("super market")){
-            return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA);}
-        if (type.equals("monument historic")){
-            return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE);}
-        if (type.equals("bank")){
-            return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET);}
-        else {
-            return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
-        }
-    }
-    public static int get_color(String type){
-        if (type.equals("Ecole")){
-            return R.drawable.colors_point;//0xFF3800;
-        }
-        if (type.equals("Restaurant")){
-            return R.drawable.colors_point1;//FFEF00	;}
-        }
-        if (type.equals("Cafe")){
-            return R.drawable.colors_point2;//00FFFF;}
-        }
-        if (type.equals("Hospital")){
-            return R.drawable.colors_point3;//007BA7;}
-        }
-        if (type.equals("faculte")){
-            return R.drawable.colors_point4;//138808;}
-        }
-        if (type.equals("super market")){
-            return R.drawable.colors_point5;//FF00FF;}
-        }
-        if (type.equals("monument historic")){
-            return R.drawable.colors_point6;//ED872D;}
-        }
-        if (type.equals("bank")){
-            return R.drawable.colors_point7;//BF94E4;}
-        }
-        else {
-            return R.drawable.colors_point;//ff0000;
-        }
-    }
     private void getDeviceLocation() {
         try {
             if (mLocationPermissionGranted) {
@@ -263,14 +205,14 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
                                 new LatLng(mLastKnownLocation.getLatitude(),
                                         mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                     } else {
-                        Log.d(TAG, "Current location is null. Using defaults.");
-                        Log.e(TAG, "Exception: %s", task.getException());
+                        Timber.tag(TAG).d("Current location is null. Using defaults.");
+                        Timber.tag(TAG).e(task.getException(), "Exception: ");
                         gmap.getUiSettings().setMyLocationButtonEnabled(false);
                     }
                 });
             }
         } catch (SecurityException e)  {
-            Log.e("Exception: %s", e.toString());
+            Timber.tag("Exception: ").e(e.toString());
         }
     }
     private void getLocationPermission() {
@@ -295,7 +237,7 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
                 mLocationPermissionGranted = true;
             }
         }
-        updateLocationUI();
+        updateLocationUI();showCurrentPlace();
     }
     private void updateLocationUI() {
         if (gmap == null) {
@@ -312,7 +254,7 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
                 getLocationPermission();
             }
         } catch (SecurityException e)  {
-            Log.e("Exception: %s", e.getMessage());
+            Timber.tag("Exception: ").e(e);
         }
     }
     private void showCurrentPlace() {
@@ -362,11 +304,11 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
                             openPlacesDialog();
 
                         } else {
-                            Log.e(TAG, "Exception: %s", task.getException());
+                            Timber.tag(TAG).e(task.getException(), "Exception: ");
                         }
                     });
         } else {
-            Log.i(TAG, "The user did not grant location permission.");
+            Timber.tag(TAG).i("The user did not grant location permission.");
             getLocationPermission();
         }
     }

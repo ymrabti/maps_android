@@ -2,6 +2,7 @@
 <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:tools="http://schemas.android.com/tools"
@@ -16,6 +17,7 @@
             android:layout_height="100dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/white"
             android:text="@string/arcgis_map"
             android:background="@color/arcgis_map"
             android:layout_margin="80dp"/>
@@ -26,6 +28,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@string/arcgis_scene"
+            android:textColor="@color/white"
             android:background="@color/arcgis_scene"
             android:layout_margin="80dp"/>
         <Button
@@ -35,12 +38,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/arcgis_map"
             android:text="@string/osm"
+            android:textColor="@color/white"
             android:background="@color/osm"
             android:layout_marginTop="20dp"
             android:layout_marginStart="80dp"/>
         <Button
             android:id="@+id/google_map"
             android:layout_width="100dp"
+            android:textColor="@color/white"
             android:layout_height="100dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/arcgis_scene"
@@ -55,6 +60,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/osm"
             android:text="@string/bing_maps"
+            android:textColor="@color/white"
             android:background="@color/bing_maps"
             android:layout_marginTop="20dp"
             android:layout_marginStart="80dp"/>
@@ -65,6 +71,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/osm"
             android:text="@string/here_map"
+            android:textColor="@color/white"
             android:background="@color/here_map"
             android:layout_marginEnd="80dp"
             android:layout_marginTop="20dp"/>
@@ -83,6 +90,7 @@
             android:id="@+id/tomtom_map"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bing_maps"
             android:text="@string/tomtom_map"

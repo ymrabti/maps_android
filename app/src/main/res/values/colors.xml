@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimary">#232323</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="arcgis_map">#298AAF</color>
@@ -13,4 +13,6 @@
     <color name="tomtom_map">#FF5722</color>
     <color name="defaultMapSurfaceColor">#0000ff</color>
     <color name="cardview_light_back">#0046FF</color>
+    <color name="white">#FFF</color>
+    <color name="dark">#232323</color>
 </resources>

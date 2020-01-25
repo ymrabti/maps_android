@@ -67,7 +67,10 @@ import com.esri.arcgisruntime.util.ListenableList;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
+
+import timber.log.Timber;
 
 public class ArcgisActivity extends AppCompatActivity {
     private MapView mMapView;
@@ -77,7 +80,6 @@ public class ArcgisActivity extends AppCompatActivity {
     private GraphicsOverlay mGraphicsOverlay;
     private LocatorTask mLocatorTask = null;
     private GeocodeParameters mGeocodeParameters = null;
-    private GraphicsOverlay graphicsOverlay;
     private LocatorTask locator = new LocatorTask("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
     private Spinner spinner;
     private Point mStart;
@@ -87,12 +89,26 @@ public class ArcgisActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arcgis);
         ActionBar actionBar= getSupportActionBar();actionBar.setTitle("Esri Maps");
-        mMapView = findViewById(R.id.mapView);
-        mGraphicsOverlay = new GraphicsOverlay();
-        mMapView.getGraphicsOverlays().add(mGraphicsOverlay);
         ArcGISRuntimeEnvironment.setLicense(getResources().getString(R.string.arcgis_license_key));
-        setupMap2();setupLocationDisplay();
-        setupLocator();
+        mMapView = findViewById(R.id.mapView);
+        try {
+            setupMap2();
+        }
+        catch (Exception exc){
+            Timber.tag("exception").i("younes mrabti  "+exc.getMessage() + "\n" + exc.toString() + "\n" + exc +"\n" );
+        }
+        try {
+            setupLocationDisplay();
+        }
+        catch (Exception exc){
+            Timber.tag("exception").i("younes mrabti  "+exc.getMessage() + "\n" + exc.toString() + "\n" + exc +"\n" );
+        }
+        try {
+            setupLocator();
+        }
+        catch (Exception exc){
+            Timber.tag("exception").i("younes mrabti  "+exc.getMessage() + "\n" + exc.toString() + "\n" + exc +"\n" );
+        }
     }
     private void setupMap() {
         if (mMapView != null) {
@@ -128,6 +144,10 @@ public class ArcgisActivity extends AppCompatActivity {
             Viewpoint viewpoint = new Viewpoint(latitude,longitude,scale);
             arcGISMap.setInitialViewpoint(viewpoint);
             mMapView.setMap(arcGISMap);
+
+            mGraphicsOverlay = new GraphicsOverlay();
+            mMapView.getGraphicsOverlays().add(mGraphicsOverlay);
+
             mMapView.setOnTouchListener(new DefaultMapViewOnTouchListener(this, mMapView) {
                 @Override public boolean onSingleTapConfirmed(MotionEvent e) {
                     android.graphics.Point screenPoint = new android.graphics.Point(
@@ -142,7 +162,7 @@ public class ArcgisActivity extends AppCompatActivity {
             mMapView.addViewpointChangedListener(new ViewpointChangedListener() {
                 @Override
                 public void viewpointChanged(ViewpointChangedEvent viewpointChangedEvent) {
-                    if (graphicsOverlay == null) {
+                    if (mGraphicsOverlay == null) {
                         setupSpinner();
                         setupPlaceTouchListener();
                         setupNavigationChangedListener();
@@ -289,7 +309,7 @@ public class ArcgisActivity extends AppCompatActivity {
         final ListenableFuture<List<GeocodeResult>> results = locator.geocodeAsync(placeCategory, parameters);
         results.addDoneListener(() -> {
             try {
-                ListenableList<Graphic> graphics = graphicsOverlay.getGraphics();
+                ListenableList<Graphic> graphics = mGraphicsOverlay.getGraphics();
                 graphics.clear();
                 List<GeocodeResult> places = results.get();
                 for (GeocodeResult result : places) {
@@ -298,7 +318,7 @@ public class ArcgisActivity extends AppCompatActivity {
                     SimpleMarkerSymbol placeSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.Style.CIRCLE, Color.GREEN, 10);
                     placeSymbol.setOutline(new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.WHITE, 2));
                     Graphic graphic = new Graphic(result.getDisplayLocation(), placeSymbol);
-                    java.util.Map<String, Object> attributes = result.getAttributes();
+                    Map<String, Object> attributes = result.getAttributes();
 
                     // Store the location attributes with the graphic for later recall when this location is identified.
                     for (String key : attributes.keySet()) {
@@ -357,7 +377,7 @@ public class ArcgisActivity extends AppCompatActivity {
                 final android.graphics.Point screenPoint = new android.graphics.Point(Math.round(motionEvent.getX()), Math.round(motionEvent.getY()));
 
                 // identify graphics on the graphics overlay
-                final ListenableFuture<IdentifyGraphicsOverlayResult> identifyGraphic = mMapView.identifyGraphicsOverlayAsync(graphicsOverlay, screenPoint, 10.0, false, 2);
+                final ListenableFuture<IdentifyGraphicsOverlayResult> identifyGraphic = mMapView.identifyGraphicsOverlayAsync(mGraphicsOverlay, screenPoint, 10.0, false, 2);
 
                 identifyGraphic.addDoneListener(() -> {
                     try {
