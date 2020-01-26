@@ -82,8 +82,12 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBTGq9wgUpIhsXcYre6WwkhSxjkydSaaAw"/>
-        <meta-data android:name="com.here.sdk.access_key_id" android:value="-EhdAyxoH-yp8s7gIUsTFg" />
-        <meta-data android:name="com.here.sdk.access_key_secret" android:value="pyfwI7jE0rkzexRJOI1qs9H7jHrLvdTNYVt0ajv0DvBPldLhoeho95SDwg7lZ8CvXi57jCu_88pfnYgSH053gQ" />
+        <meta-data
+            android:name="com.here.sdk.access_key_id"
+            android:value="-EhdAyxoH-yp8s7gIUsTFg" />
+        <meta-data
+            android:name="com.here.sdk.access_key_secret"
+            android:value="pyfwI7jE0rkzexRJOI1qs9H7jHrLvdTNYVt0ajv0DvBPldLhoeho95SDwg7lZ8CvXi57jCu_88pfnYgSH053gQ" />
     </application>
 
 </manifest>
