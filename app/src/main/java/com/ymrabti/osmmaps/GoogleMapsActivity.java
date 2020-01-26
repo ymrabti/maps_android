@@ -132,9 +132,7 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
     @Override public void onLowMemory() { super.onLowMemory();mapView.onLowMemory(); }
     @Override public void onMapReady(GoogleMap googleMap) {
         gmap = googleMap;
-
         gmap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-
             @Override
             public View getInfoWindow(Marker arg0) {
                 return null;
@@ -152,12 +150,15 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
         });
         gmap.setMinZoomPreference(1);
         gmap.setIndoorEnabled(true);
+
         UiSettings uiSettings = gmap.getUiSettings();
+
         uiSettings.setIndoorLevelPickerEnabled(true);
         uiSettings.setMyLocationButtonEnabled(true);
         uiSettings.setMapToolbarEnabled(true);
         uiSettings.setCompassEnabled(true);
         uiSettings.setZoomControlsEnabled(true);
+
         gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         getLocationPermission();
         updateLocationUI();
@@ -229,8 +230,8 @@ public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyC
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
-    @Override public void onRequestPermissionsResult(int requestCode
-            , @NonNull String[] permissions, @NonNull int[] grantResults) {
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         mLocationPermissionGranted = false;
         if (requestCode == PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) {// If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

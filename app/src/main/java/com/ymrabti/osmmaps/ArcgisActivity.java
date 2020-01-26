@@ -1,11 +1,5 @@
 package com.ymrabti.osmmaps;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
@@ -15,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,12 +20,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.esri.arcgisruntime.ArcGISRuntimeEnvironment;
 import com.esri.arcgisruntime.concurrent.ListenableFuture;
 import com.esri.arcgisruntime.geometry.Point;
 import com.esri.arcgisruntime.geometry.Polyline;
 import com.esri.arcgisruntime.layers.ArcGISVectorTiledLayer;
-import com.esri.arcgisruntime.layers.FeatureLayer;
 import com.esri.arcgisruntime.loadable.LoadStatus;
 import com.esri.arcgisruntime.mapping.ArcGISMap;
 import com.esri.arcgisruntime.mapping.Basemap;
@@ -68,13 +66,14 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 import timber.log.Timber;
 
 public class ArcgisActivity extends AppCompatActivity {
     private MapView mMapView;
-    private FeatureLayer mFeatureLayer;private ArcGISMap arcGISMap;
+    //private FeatureLayer mFeatureLayer;
     private LocationDisplay mLocationDisplay;
     private SearchView mSearchView = null;
     private GraphicsOverlay mGraphicsOverlay;
@@ -88,7 +87,10 @@ public class ArcgisActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arcgis);
-        ActionBar actionBar= getSupportActionBar();actionBar.setTitle("Esri Maps");
+        ActionBar actionBar= getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Esri Maps");
+        }
         ArcGISRuntimeEnvironment.setLicense(getResources().getString(R.string.arcgis_license_key));
         mMapView = findViewById(R.id.mapView);
         try {
@@ -110,7 +112,7 @@ public class ArcgisActivity extends AppCompatActivity {
             Timber.tag("exception").i("younes mrabti  "+exc.getMessage() + "\n" + exc.toString() + "\n" + exc +"\n" );
         }
     }
-    private void setupMap() {
+    /*private void setupMap() {
         if (mMapView != null) {
             Basemap.Type basemapType = Basemap.Type.STREETS;
             double latitude = 33.547595;
@@ -130,6 +132,18 @@ public class ArcgisActivity extends AppCompatActivity {
             mMapView.setMap(arcGISMap);
         }
     }
+    private void addLayer() {
+        Portal portal = new Portal("http://www.arcgis.com");
+        final PortalItem portalItem = new PortalItem(portal, "4d4f1a6c40e04349b0ded0a301f8c272");
+        mFeatureLayer = new FeatureLayer(portalItem,0);
+        mFeatureLayer.addDoneLoadingListener(() -> {
+            if (mFeatureLayer.getLoadStatus() == LoadStatus.LOADED) {
+                arcGISMap.getOperationalLayers().add(mFeatureLayer);
+            }
+        });
+        mFeatureLayer.loadAsync();
+    }
+    */
     @SuppressLint("ClickableViewAccessibility")
     private void setupMap2() {
         if (mMapView != null) {
@@ -140,7 +154,7 @@ public class ArcgisActivity extends AppCompatActivity {
             Portal portalService = new Portal("https://www.arcgis.com", false);
             PortalItem portalItemLayer = new PortalItem(portalService, myLayerId);
             ArcGISVectorTiledLayer myCustomTileLayer = new ArcGISVectorTiledLayer(portalItemLayer);
-            arcGISMap = new ArcGISMap(new Basemap(myCustomTileLayer));
+            ArcGISMap arcGISMap = new ArcGISMap(new Basemap(myCustomTileLayer));
             Viewpoint viewpoint = new Viewpoint(latitude,longitude,scale);
             arcGISMap.setInitialViewpoint(viewpoint);
             mMapView.setMap(arcGISMap);
@@ -180,17 +194,6 @@ public class ArcgisActivity extends AppCompatActivity {
             mGraphicsOverlay.getGraphics().add(pointGraphic);
         }
     }
-    private void addLayer() {
-        Portal portal = new Portal("http://www.arcgis.com");
-        final PortalItem portalItem = new PortalItem(portal, "4d4f1a6c40e04349b0ded0a301f8c272");
-        mFeatureLayer = new FeatureLayer(portalItem,0);
-        mFeatureLayer.addDoneLoadingListener(() -> {
-            if (mFeatureLayer.getLoadStatus() == LoadStatus.LOADED) {
-                arcGISMap.getOperationalLayers().add(mFeatureLayer);
-            }
-        });
-        mFeatureLayer.loadAsync();
-    }
     private void setupLocationDisplay() {
         mLocationDisplay = mMapView.getLocationDisplay();
         mLocationDisplay.addDataSourceStatusChangedListener(dataSourceStatusChangedEvent -> {
@@ -199,11 +202,17 @@ public class ArcgisActivity extends AppCompatActivity {
             }
 
             int requestPermissionsCode = 2;
-            String[] requestPermissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+            String[] requestPermissions = new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                    , Manifest.permission.ACCESS_COARSE_LOCATION};
 
-            if (!(ContextCompat.checkSelfPermission(ArcgisActivity.this, requestPermissions[0]) == PackageManager.PERMISSION_GRANTED
-                    && ContextCompat.checkSelfPermission(ArcgisActivity.this, requestPermissions[1]) == PackageManager.PERMISSION_GRANTED)) {
+            if (!(ContextCompat.checkSelfPermission(
+                    ArcgisActivity.this, requestPermissions[0]) == PackageManager.PERMISSION_GRANTED
+                    && ContextCompat.checkSelfPermission(
+                            ArcgisActivity.this, requestPermissions[1]) == PackageManager.PERMISSION_GRANTED)) {
+
                 ActivityCompat.requestPermissions(ArcgisActivity.this, requestPermissions, requestPermissionsCode);
+
             } else {
                 String message = String.format("Error in DataSourceStatusChangedListener: %s",
                         dataSourceStatusChangedEvent.getSource().getLocationDataSource().getError().getMessage());
@@ -213,11 +222,13 @@ public class ArcgisActivity extends AppCompatActivity {
         mLocationDisplay.setAutoPanMode(LocationDisplay.AutoPanMode.COMPASS_NAVIGATION);
         mLocationDisplay.startAsync();
     }
-    @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             mLocationDisplay.startAsync();
         } else {
-            Toast.makeText(ArcgisActivity.this, getResources().getString(R.string.location_permission_denied), Toast.LENGTH_SHORT).show();
+            Toast.makeText(ArcgisActivity.this
+                    , getResources().getString(R.string.location_permission_denied), Toast.LENGTH_SHORT).show();
         }
     }
     @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -228,7 +239,9 @@ public class ArcgisActivity extends AppCompatActivity {
             mSearchView = (SearchView) searchMenuItem.getActionView();
             if (mSearchView != null) {
                 SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-                mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+                if (searchManager != null) {
+                    mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+                }
                 mSearchView.setIconifiedByDefault(false);
             }
         }
@@ -315,14 +328,15 @@ public class ArcgisActivity extends AppCompatActivity {
                 for (GeocodeResult result : places) {
 
                     // Add a graphic representing each location with a simple marker symbol.
-                    SimpleMarkerSymbol placeSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.Style.CIRCLE, Color.GREEN, 10);
+                    SimpleMarkerSymbol placeSymbol =
+                            new SimpleMarkerSymbol(SimpleMarkerSymbol.Style.CIRCLE, Color.GREEN, 10);
                     placeSymbol.setOutline(new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.WHITE, 2));
                     Graphic graphic = new Graphic(result.getDisplayLocation(), placeSymbol);
                     Map<String, Object> attributes = result.getAttributes();
 
                     // Store the location attributes with the graphic for later recall when this location is identified.
                     for (String key : attributes.keySet()) {
-                        String value = attributes.get(key).toString();
+                        String value = Objects.requireNonNull(attributes.get(key)).toString();
                         graphic.getAttributes().put(key, value);
                     }
                     graphics.add(graphic);
@@ -338,7 +352,10 @@ public class ArcgisActivity extends AppCompatActivity {
 
         callout.setLocation(graphic.computeCalloutLocation(mapPoint, mMapView));
         calloutContent.setTextColor(Color.BLACK);
-        calloutContent.setText(Html.fromHtml("<b>" + graphic.getAttributes().get("PlaceName").toString() + "</b><br>" + graphic.getAttributes().get("Place_addr").toString()));
+        //noinspection deprecation
+        calloutContent.setText(Html.fromHtml("<b>"
+                + Objects.requireNonNull(graphic.getAttributes().get("PlaceName")).toString()
+                + "</b><br>" + Objects.requireNonNull(graphic.getAttributes().get("Place_addr")).toString()));
         callout.setContent(calloutContent);
         callout.show();
     }
@@ -430,7 +447,7 @@ public class ArcgisActivity extends AppCompatActivity {
         }
     }
     private void showError(String message) {
-        Log.d("FindRoute", message);
+        Timber.tag("FindRoute").d(message);
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
     private void mapClicked(Point location) {

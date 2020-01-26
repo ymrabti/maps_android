@@ -39,4 +39,5 @@ dependencies {
     implementation("com.tomtom.online:sdk-search:2.4384")
     implementation 'com.google.android.libraries.places:places-compat:2.1.0'
     implementation 'com.google.android.material:material:1.0.0'
+    implementation(name:'HERE-sdk', ext:'aar')
 }

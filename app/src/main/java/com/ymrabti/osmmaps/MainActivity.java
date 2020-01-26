@@ -1,5 +1,6 @@
 package com.ymrabti.osmmaps;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,6 +13,10 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActionBar actionBar= getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Select a Map");
+        }
         Button arcgis = findViewById(R.id.arcgis_map);
         Button arscene = findViewById(R.id.arcgis_scene);
         Button osm = findViewById(R.id.osm);
