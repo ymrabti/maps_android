@@ -10,5 +10,10 @@
     <style name="MapBackgroundStyle">
         <item name="android:background">#0000ff</item>
     </style>
+    <style name="SwitchTheme" parent="AppTheme">
+        <item name="colorSwitchThumbNormal">@color/colorPrimary</item>
+        <item name="android:colorForeground">@color/colorPrimary</item>
+    </style>
+
 
 </resources>
