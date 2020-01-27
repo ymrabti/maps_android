@@ -53,7 +53,15 @@ public class BingActivity extends AppCompatActivity {
         mPinLayer.getElements().add(pushpin);
         mMapView.setMapStyleSheet(MapStyleSheets.roadDark());
         mMapView.setMapProjection(MapProjection.GLOBE);
+
         mMapView.addOnMapTappedListener(mapTappedEventArgs -> {
+
+            MapIcon pus_hpin = new MapIcon();
+            pus_hpin.setLocation(mapTappedEventArgs.location);
+            pus_hpin.setTitle("marker tapped");
+            pus_hpin.setImage(new MapImage(((BitmapDrawable)
+                    Objects.requireNonNull(getDrawable(R.drawable.green_dot))).getBitmap()));
+            mPinLayer.getElements().add(pus_hpin);
 
             ClassWithInterface classWithInterface = new ClassWithInterface(2);
             classWithInterface.request(new ClassWithInterface.ResultListener() {
