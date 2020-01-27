@@ -10,8 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.mapviewlite.MapStyle;
 import com.here.sdk.mapviewlite.MapViewLite;
+import com.ymrabti.osmmaps.examles.GesturesExample;
 import com.ymrabti.osmmaps.examles.MapMarkerExample;
 import com.ymrabti.osmmaps.examles.MapObjectsExample;
+import com.ymrabti.osmmaps.examles.RoutingExample;
+import com.ymrabti.osmmaps.examles.SearchExample;
 import com.ymrabti.osmmaps.permession.PermissionsRequestor;
 
 import timber.log.Timber;
@@ -21,6 +24,8 @@ public class HereActivity extends AppCompatActivity {
     private PermissionsRequestor permissionsRequestor;
     private MapMarkerExample mapMarkerExample;
     private MapObjectsExample mapObjectsExample;
+    private RoutingExample routingExample;
+    private SearchExample searchExample;
     private MapViewLite mapView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,28 @@ public class HereActivity extends AppCompatActivity {
 
 
 
+
+    public void addRouteButtonClicked(View view) {
+        routingExample.addRoute();
+    }
+
+    public void addWaypointsButtonClicked(View view) {
+        routingExample.addWaypoints();
+    }
+
+    public void clearMapButtonClicked_(View view) {
+        routingExample.clearMap();
+    }
+
+
+    public void searchExampleButtonClicked(View view) {
+        searchExample.onSearchButtonClicked();
+    }
+
+    public void geocodeAnAddressButtonClicked(View view) {
+        searchExample.onGeocodeButtonClicked();
+    }
+
     private void handleAndroidPermissions() {
         permissionsRequestor = new PermissionsRequestor(this);
         permissionsRequestor.request(new PermissionsRequestor.ResultListener(){
@@ -89,6 +116,9 @@ public class HereActivity extends AppCompatActivity {
                 mapView.getCamera().setTarget(new GeoCoordinates(33.547595, -7.650056));
                 mapView.getCamera().setZoomLevel(14);
                 mapObjectsExample = new MapObjectsExample(mapView);
+                routingExample = new RoutingExample(HereActivity.this, mapView);
+                searchExample = new SearchExample(HereActivity.this, mapView);
+                new GesturesExample(HereActivity.this, mapView);
                 mapMarkerExample = new MapMarkerExample(HereActivity.this, mapView);
             } else {
                 Timber.tag("exc").d("onLoadScene failed: %s", errorCode.toString());

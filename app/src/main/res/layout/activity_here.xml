@@ -25,7 +25,6 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/anchored"
                 style="?android:attr/buttonBarButtonStyle"
                 android:onClick="anchoredMapMarkersButtonClicked" />
@@ -33,7 +32,6 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/centered"
                 style="?android:attr/buttonBarButtonStyle"
                 android:onClick="centeredMapMarkersButtonClicked" />
@@ -41,7 +39,6 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/clear"
                 style="?android:attr/buttonBarButtonStyle"
                 android:onClick="clearMapButtonClicked" />
@@ -49,7 +46,6 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/mappolyline"
                 style="?android:attr/buttonBarButtonStyle"
                 android:onClick="onMapPolylineButtonClicked" />
@@ -57,7 +53,6 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/mappolygon"
                 style="?android:attr/buttonBarButtonStyle"
                 android:onClick="onMapPolygonButtonClicked" />
@@ -65,10 +60,43 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/mapcircle"
                 style="?android:attr/buttonBarButtonStyle"
                 android:onClick="onMapCircleButtonClicked" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="@string/add_route"
+                android:onClick="addRouteButtonClicked" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="@string/add_waypoints"
+                android:onClick="addWaypointsButtonClicked" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="@string/clear_map"
+                android:onClick="clearMapButtonClicked_" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="@string/search"
+                android:onClick="searchExampleButtonClicked" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="@string/geocoding"
+                android:onClick="geocodeAnAddressButtonClicked" />
         </LinearLayout>
     </HorizontalScrollView>
 
