@@ -5,18 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.microsoft.maps.MapProjection;
 import com.microsoft.maps.MapRenderMode;
+import com.microsoft.maps.MapTappedEventArgs;
 import com.microsoft.maps.MapView;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.widget.FrameLayout;
+import android.widget.Toast;
+
 import com.microsoft.maps.Geopoint;
 import com.microsoft.maps.MapElementLayer;
 import com.microsoft.maps.MapIcon;
 import com.microsoft.maps.MapImage;
 import org.jetbrains.annotations.NotNull;
 import com.microsoft.maps.MapStyleSheets;
+import com.microsoft.maps.OnMapTappedListener;
+import com.ymrabti.osmmaps.tests.ClassWithInterface;
 
 
 import java.util.Objects;
@@ -48,6 +53,22 @@ public class BingActivity extends AppCompatActivity {
         mPinLayer.getElements().add(pushpin);
         mMapView.setMapStyleSheet(MapStyleSheets.roadDark());
         mMapView.setMapProjection(MapProjection.GLOBE);
+        mMapView.addOnMapTappedListener(mapTappedEventArgs -> {
+
+            ClassWithInterface classWithInterface = new ClassWithInterface(2);
+            classWithInterface.request(new ClassWithInterface.ResultListener() {
+                @Override
+                public void younes() {
+                    Toast.makeText(BingActivity.this,"younes",Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void mrabti() {
+                    Toast.makeText(BingActivity.this,"mrabti",Toast.LENGTH_LONG).show();
+                }
+            });
+            return true;
+        });
     }
     @Override
     protected void onStart() {

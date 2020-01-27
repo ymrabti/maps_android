@@ -11,15 +11,15 @@ public class ClassWithInterface {
     }
 
     public interface ResultListener {
-        void permissionsGranted();
-        void permissionsDenied();
+        void younes();
+        void mrabti();
     }
     public void request(ResultListener resultListener) {
 
         if (numero == 0) {
-            resultListener.permissionsGranted();
+            resultListener.younes();
         } else {
-            resultListener.permissionsDenied();
+            resultListener.mrabti();
         }
     }
 }
