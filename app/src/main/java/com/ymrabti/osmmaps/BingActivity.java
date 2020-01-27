@@ -2,14 +2,27 @@ package com.ymrabti.osmmaps;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.microsoft.maps.MapProjection;
 import com.microsoft.maps.MapRenderMode;
 import com.microsoft.maps.MapView;
+
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.widget.FrameLayout;
-
+import com.microsoft.maps.Geopoint;
+import com.microsoft.maps.MapElementLayer;
+import com.microsoft.maps.MapIcon;
+import com.microsoft.maps.MapImage;
 import org.jetbrains.annotations.NotNull;
+import com.microsoft.maps.MapStyleSheets;
+
+
+import java.util.Objects;
 
 public class BingActivity extends AppCompatActivity {
+    private MapElementLayer mPinLayer;
     private MapView mMapView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +36,18 @@ public class BingActivity extends AppCompatActivity {
         mMapView.setCredentialsKey(BuildConfig.CREDENTIALS_KEY);
         ((FrameLayout)findViewById(R.id.map_view_bing)).addView(mMapView);
         mMapView.onCreate(savedInstanceState);
+        mPinLayer = new MapElementLayer();
+        mMapView.getLayers().add(mPinLayer);
+        Geopoint location = new Geopoint(33.547595,-7.650056);
+        String title =  "marker micro soft";
+        Bitmap pinBitmap = ((BitmapDrawable) Objects.requireNonNull(getDrawable(R.drawable.circle))).getBitmap() ;
+        MapIcon pushpin = new MapIcon();
+        pushpin.setLocation(location);
+        pushpin.setTitle(title);
+        pushpin.setImage(new MapImage(pinBitmap));
+        mPinLayer.getElements().add(pushpin);
+        mMapView.setMapStyleSheet(MapStyleSheets.roadDark());
+        mMapView.setMapProjection(MapProjection.GLOBE);
     }
     @Override
     protected void onStart() {
