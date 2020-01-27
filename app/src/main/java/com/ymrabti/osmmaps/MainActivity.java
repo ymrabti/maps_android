@@ -20,9 +20,9 @@ public class MainActivity extends AppCompatActivity  {
         Button arcgis = findViewById(R.id.arcgis_map);
         Button arscene = findViewById(R.id.arcgis_scene);
         Button osm = findViewById(R.id.osm);
-        Button leaflet = findViewById(R.id.Leaflet_maps);
-        Button bing = findViewById(R.id.bing_maps);
-        Button tomtom = findViewById(R.id.tomtom_map);
+        Button leaflet = findViewById(R.id.Leaflet_maps);disableButton(leaflet);
+        Button bing = findViewById(R.id.bing_maps);disableButton(bing);
+        Button tomtom = findViewById(R.id.tomtom_map);disableButton(tomtom);
         Button google = findViewById(R.id.google_map);
         Button here = findViewById(R.id.here_map);
         arcgis.setOnClickListener(v -> openActivity(ArcgisActivity.class));
@@ -39,4 +39,7 @@ public class MainActivity extends AppCompatActivity  {
         startActivity(intent);
     }
 
+    private void disableButton(Button button){
+        button.setEnabled(false);button.setAlpha((float) 0.3);
+    }
 }

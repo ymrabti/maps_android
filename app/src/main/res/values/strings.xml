@@ -23,4 +23,10 @@
     <string name="ajouter">ajouter</string>
     <string name="type_de_point">Type de point : </string>
     <string name="nom_de_point">Nom de point</string>
+    <string name="anchored">Anchored</string>
+    <string name="centered">Centered</string>
+    <string name="clear">Clear</string>
+    <string name="mappolyline">MapPolyline</string>
+    <string name="mappolygon">MapPolygon</string>
+    <string name="mapcircle">MapCircle</string>
 </resources>

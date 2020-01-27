@@ -12,31 +12,64 @@
         android:layout_height="match_parent">
     </com.here.sdk.mapviewlite.MapViewLite>
 
-    <LinearLayout
+    <HorizontalScrollView
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Button
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Anchored"
-            android:onClick="anchoredMapMarkersButtonClicked" />
+            style="?android:attr/buttonBarStyle">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Centered"
-            android:onClick="centeredMapMarkersButtonClicked" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/anchored"
+                style="?android:attr/buttonBarButtonStyle"
+                android:onClick="anchoredMapMarkersButtonClicked" />
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Clear"
-            android:onClick="clearMapButtonClicked" />
-    </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/centered"
+                style="?android:attr/buttonBarButtonStyle"
+                android:onClick="centeredMapMarkersButtonClicked" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/clear"
+                style="?android:attr/buttonBarButtonStyle"
+                android:onClick="clearMapButtonClicked" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/mappolyline"
+                style="?android:attr/buttonBarButtonStyle"
+                android:onClick="onMapPolylineButtonClicked" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/mappolygon"
+                style="?android:attr/buttonBarButtonStyle"
+                android:onClick="onMapPolygonButtonClicked" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/mapcircle"
+                style="?android:attr/buttonBarButtonStyle"
+                android:onClick="onMapCircleButtonClicked" />
+        </LinearLayout>
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

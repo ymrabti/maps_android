@@ -11,6 +11,7 @@ import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.mapviewlite.MapStyle;
 import com.here.sdk.mapviewlite.MapViewLite;
 import com.ymrabti.osmmaps.examles.MapMarkerExample;
+import com.ymrabti.osmmaps.examles.MapObjectsExample;
 import com.ymrabti.osmmaps.permession.PermissionsRequestor;
 
 import timber.log.Timber;
@@ -19,6 +20,7 @@ public class HereActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private PermissionsRequestor permissionsRequestor;
     private MapMarkerExample mapMarkerExample;
+    private MapObjectsExample mapObjectsExample;
     private MapViewLite mapView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,24 @@ public class HereActivity extends AppCompatActivity {
     public void clearMapButtonClicked(View view) {
         mapMarkerExample.clearMap();
     }
+
+
+
+
+    public void onMapPolylineButtonClicked(View view) {
+        mapObjectsExample.showMapPolyline();
+    }
+
+    public void onMapPolygonButtonClicked(View view) {
+        mapObjectsExample.showMapPolygon();
+    }
+
+    public void onMapCircleButtonClicked(View view) {
+        mapObjectsExample.showMapCircle();
+    }
+
+
+
     private void handleAndroidPermissions() {
         permissionsRequestor = new PermissionsRequestor(this);
         permissionsRequestor.request(new PermissionsRequestor.ResultListener(){
@@ -68,6 +88,7 @@ public class HereActivity extends AppCompatActivity {
             if (errorCode == null) {
                 mapView.getCamera().setTarget(new GeoCoordinates(33.547595, -7.650056));
                 mapView.getCamera().setZoomLevel(14);
+                mapObjectsExample = new MapObjectsExample(mapView);
                 mapMarkerExample = new MapMarkerExample(HereActivity.this, mapView);
             } else {
                 Timber.tag("exc").d("onLoadScene failed: %s", errorCode.toString());
