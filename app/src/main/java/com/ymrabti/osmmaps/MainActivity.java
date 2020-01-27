@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity  {
         Button arscene = findViewById(R.id.arcgis_scene);
         Button osm = findViewById(R.id.osm);
         Button leaflet = findViewById(R.id.Leaflet_maps);disableButton(leaflet);
-        Button bing = findViewById(R.id.bing_maps);disableButton(bing);
+        Button bing = findViewById(R.id.bing_maps);
         Button tomtom = findViewById(R.id.tomtom_map);disableButton(tomtom);
         Button google = findViewById(R.id.google_map);
         Button here = findViewById(R.id.here_map);

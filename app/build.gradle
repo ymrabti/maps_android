@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply from: 'secrets.gradle'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -15,6 +15,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        buildTypes.each {
+            it.buildConfigField "String", "CREDENTIALS_KEY", "\"$credentialsKey\""
         }
     }
     compileOptions {
@@ -40,4 +43,5 @@ dependencies {
     implementation 'com.google.android.libraries.places:places-compat:2.1.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation(name:'HERE-sdk', ext:'aar')
+    implementation 'com.microsoft.maps:maps-sdk:1.0.0'
 }
