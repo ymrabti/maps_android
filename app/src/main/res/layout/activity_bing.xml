@@ -12,10 +12,143 @@
         android:layout_height="match_parent"
         />
 
+    <LinearLayout
+        android:id="@+id/menu_demo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/map_view_bing"
+        app:layout_constraintBottom_toBottomOf="@id/map_view_bing"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginTop="40dp"
+        android:paddingBottom="16dp"
+
+        android:orientation="vertical"
+
+        android:visibility="gone"
+        android:elevation="1dp"
+        android:background="#DDFFFFFF"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tile_layer"
+            android:textStyle="bold"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/spinner_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/map_styles"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_style_custom"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="@string/custom"
+                android:background="@drawable/button_default"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/map_projection"
+            android:textStyle="bold"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mercator"
+                />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_projection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/SwitchTheme"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/globe"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/pois"
+            android:textStyle="bold"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_poi_tap"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="@string/add_on_tap"
+                android:background="@drawable/button_default"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_poi_search"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_marginStart="12dp"
+                android:text="@string/add_by_search"
+                android:background="@drawable/button_default"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_poi_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_marginStart="12dp"
+                android:text="@string/clear_all"
+                android:background="@drawable/button_default"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,13 +158,15 @@
             android:id="@+id/button_demo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            >
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:text="Demo"
+            android:text="@string/demo"
             android:textColor="@android:color/white"
             />
 

@@ -39,7 +39,6 @@ import com.microsoft.maps.MapStyleSheets;
 import com.microsoft.maps.MapTappedEventArgs;
 import com.microsoft.maps.MapView;
 import com.ymrabti.osmmaps.examles.LocalSearch;
-import com.ymrabti.osmmaps.tests.ClassWithInterface;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -108,30 +107,6 @@ public class BingActivity extends AppCompatActivity {
         mPinLayer.getElements().add(pushpin);
         mMapView.setMapStyleSheet(MapStyleSheets.roadDark());
         mMapView.setMapProjection(MapProjection.GLOBE);
-
-        mMapView.addOnMapTappedListener(mapTappedEventArgs -> {
-
-            MapIcon pus_hpin = new MapIcon();
-            pus_hpin.setLocation(mapTappedEventArgs.location);
-            pus_hpin.setTitle("marker tapped");
-            pus_hpin.setImage(new MapImage(((BitmapDrawable)
-                    Objects.requireNonNull(getDrawable(R.drawable.green_dot))).getBitmap()));
-            mPinLayer.getElements().add(pus_hpin);
-
-            ClassWithInterface classWithInterface = new ClassWithInterface(2);
-            classWithInterface.request(new ClassWithInterface.ResultListener() {
-                @Override
-                public void younes() {
-                    Toast.makeText(BingActivity.this,"younes",Toast.LENGTH_LONG).show();
-                }
-
-                @Override
-                public void mrabti() {
-                    Toast.makeText(BingActivity.this,"mrabti",Toast.LENGTH_LONG).show();
-                }
-            });
-            return true;
-        });
 
         setupDemoMenu();
     }
@@ -269,8 +244,8 @@ public class BingActivity extends AppCompatActivity {
             boolean wasVisible = mDemoMenu.getVisibility() == View.VISIBLE;
             mDemoMenu.setVisibility(wasVisible ? View.GONE : View.VISIBLE);
         });
-
         mStyleSpinner = findViewById(R.id.spinner_style);
+
         mStyleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -286,7 +261,7 @@ public class BingActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) { /* required */ }
+            public void onNothingSelected(AdapterView<?> parent) {  /*required*/  }
         });
         findViewById(R.id.button_style_custom).setOnClickListener((View v) ->
                 mStyleSpinner.setSelection(POSITION_CUSTOM));
@@ -294,7 +269,6 @@ public class BingActivity extends AppCompatActivity {
         ((SwitchCompat)findViewById(R.id.switch_projection)).setOnCheckedChangeListener(
                 (CompoundButton buttonView, boolean isChecked) ->
                         mMapView.setMapProjection(isChecked ? MapProjection.GLOBE : MapProjection.WEB_MERCATOR));
-
         mButtonPoiTap = findViewById(R.id.button_poi_tap);
         mButtonPoiTap.setTag(false);
         mButtonPoiTap.setOnClickListener((View v) -> {

@@ -34,6 +34,16 @@
     <string name="clear_map">Clear Map</string>
     <string name="geocoding">Geocoding</string>
     <string name="search">Search</string>
+    <string name="add_by_search">Add by search</string>
+    <string name="clear_all">Clear all</string>
+    <string name="add_on_tap">Add on tap</string>
+    <string name="pois">POIs</string>
+    <string name="globe">Globe</string>
+    <string name="mercator">Mercator</string>
+    <string name="map_projection">Map projection</string>
+    <string name="custom">Custom</string>
+    <string name="tile_layer">Tile layer</string>
+    <string name="demo">Demo</string>
 
     <string-array name="map_styles">
         <item>Symbolic Light</item>
